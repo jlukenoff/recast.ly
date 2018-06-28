@@ -10,7 +10,7 @@ class App extends React.Component {
   }
   
   handleClick(index) {
-    let vidList = this.state.currentVideoList
+    let vidList = this.state.currentVideoList;
     this.setState({
       currentVideo: vidList[index]
     });
