@@ -16,12 +16,26 @@ class App extends React.Component {
     });
   }
 
+  searchYouTube(term) {
+    // fetch(`https://www.googleapis.com/youtube/v3/search?key=${window.YOUTUBE_API_KEY}&type=video&q=${term}&part=snippet,id&maxResults=5`)
+    //   .then(resp => resp.json())
+    //   .then((resp) => {
+    //     console.log(resp);
+    //     //this.setState({video: resp.results});
+    //     // this.setState({video: resp.items});
+    //     // console.log(this.state.video);
+    //   });
+    console.log(term);
+    // make request with template to YouTube
+    // if success: set state of currentVideo, currentVideoList   
+  }
+
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search onClick = {this.searchYouTube.bind(this)}/>
           </div>
         </nav>
         <div className="row">
