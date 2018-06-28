@@ -46,7 +46,7 @@ describe('App', function() {
     });
   });
 
-  xdescribe('when rendering live data from YouTube', function() {
+  sdescribe('when rendering live data from YouTube', function() {
     var searchYouTubeStub;
 
     beforeEach(function() {

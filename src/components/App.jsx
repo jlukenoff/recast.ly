@@ -9,6 +9,13 @@ class App extends React.Component {
     };  
   }
   
+  handleClick(index) {
+    let vidList = this.state.currentVideoList
+    this.setState({
+      currentVideo: vidList[index]
+    });
+  }
+
   render() {
     return (
       <div>
@@ -22,7 +29,7 @@ class App extends React.Component {
             <VideoPlayer video = {this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos = {this.state.currentVideoList}/>
+            <VideoList videos = {this.state.currentVideoList} click = {this.handleClick.bind(this)}/>
           </div>
         </div>
       </div>
