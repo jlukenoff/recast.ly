@@ -6,7 +6,8 @@ class App extends React.Component {
     this.state = {
       currentVideoList: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0]            
-    };  
+    };
+    this.searchYouTube(this.props.searchYouTube);  
   }
   
   handleClick(index) {
@@ -17,17 +18,15 @@ class App extends React.Component {
   }
 
   searchYouTube(term) {
-    // fetch(`https://www.googleapis.com/youtube/v3/search?key=${window.YOUTUBE_API_KEY}&type=video&q=${term}&part=snippet,id&maxResults=5`)
-    //   .then(resp => resp.json())
-    //   .then((resp) => {
-    //     console.log(resp);
-    //     //this.setState({video: resp.results});
-    //     // this.setState({video: resp.items});
-    //     // console.log(this.state.video);
-    //   });
-    console.log(term);
-    // make request with template to YouTube
-    // if success: set state of currentVideo, currentVideoList   
+    let endpoint = `https://www.googleapis.com/youtube/v3/search?key=${window.YOUTUBE_API_KEY}&type=video&q=${term}&part=snippet&maxResults=5`;
+    fetch(endpoint)
+      .then(resp => resp.json())
+      .then((resp) => {
+        this.setState({
+          currentVideoList: resp.items,
+          currentVideo: resp.items[0]
+        });
+      });   
   }
 
   render() {
@@ -52,9 +51,10 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App />,
+  <App searchYouTube={'Kitties'}/>,
   document.getElementById('app')
 );
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
+window.currentInput = '';
