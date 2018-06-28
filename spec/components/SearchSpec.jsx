@@ -13,6 +13,7 @@ describe ('Search', function() {
       searchYouTubeStub = sinon.stub();
       searchYouTubeStub.onCall(0).yields(window.fakeVideoData);
       searchYouTubeStub.onCall(1).yields(window.moreFakeVideoData);
+      console.log(searchYouTubeStub);
 
       app = renderIntoDocument(
         <App searchYouTube={searchYouTubeStub} />

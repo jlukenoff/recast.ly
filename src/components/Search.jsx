@@ -1,7 +1,7 @@
 var Search = (props) => {
   return (
     <div className="search-bar form-inline">
-      <input className="form-control" type="text" onKeyUp={e => {
+      <input className="form-control" type="text" onChange={e => {
         currentInput = e.target.value; 
         props.onClick(currentInput);
       }}

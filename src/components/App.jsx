@@ -6,8 +6,7 @@ class App extends React.Component {
     this.state = {
       currentVideoList: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0]            
-    };
-    this.searchYouTube(this.props.searchYouTube);  
+    };  
   }
   
   handleClick(index) {
@@ -34,7 +33,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search onClick = {this.searchYouTube.bind(this)}/>
+            <Search onClick = {_.debounce(this.searchYouTube.bind(this), 500)}/>
           </div>
         </nav>
         <div className="row">
@@ -51,7 +50,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App searchYouTube={'Kitties'}/>,
+  <App searchYouTube={exampleVideoData}/>,
   document.getElementById('app')
 );
 // In the ES6 spec, files are "modules" and do not share a top-level scope
