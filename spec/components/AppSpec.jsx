@@ -46,17 +46,14 @@ describe('App', function() {
     });
   });
 
-  sdescribe('when rendering live data from YouTube', function() {
+  describe('when rendering live data from YouTube', function() {
     var searchYouTubeStub;
 
     beforeEach(function() {
       searchYouTubeStub = sinon.stub();
       searchYouTubeStub.yields(window.fakeVideoData);
       app = renderIntoDocument(
-        <App searchYouTube={() => { 
-          console.log(searchYoutubeStub);
-          return searchYouTubeStub;
-        }} />
+        <App searchYouTube={searchYoutubeStub} />
       );
     });
 

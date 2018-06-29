@@ -4,9 +4,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentVideoList: window.exampleVideoData,
-      currentVideo: window.exampleVideoData[0]            
+      currentVideoList: [],
+      currentVideo: {}            
     };  
+  }
+  
+  componentDidMount() {
+    if (this.props.searchYouTube === undefined) {
+      this.searchYouTube('Puppy videos');
+    } else {
+      this.setState({
+        currentVideoList: this.props.searchYouTube,
+        currentVideo: this.props.searchYouTube[0]
+      });
+    }
   }
   
   handleClick(index) {
@@ -38,10 +49,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video = {this.state.currentVideo}/>
+            {this.state.currentVideoList.length === 0 ? null : <VideoPlayer video = {this.state.currentVideo}/>}
           </div>
           <div className="col-md-5">
-            <VideoList videos = {this.state.currentVideoList} click = {this.handleClick.bind(this)}/>
+            {this.state.currentVideoList.length === 0 ? null : <VideoList videos = {this.state.currentVideoList} click = {this.handleClick.bind(this)}/>}
           </div>
         </div>
       </div>
@@ -50,10 +61,11 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App searchYouTube={exampleVideoData}/>,
+  <App />,
   document.getElementById('app')
 );
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 window.App = App;
 window.currentInput = '';
+window.autoPlay = false;
